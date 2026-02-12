@@ -1,0 +1,1 @@
+These SHACL shapes were identified via a scan of SolidOS GitHub repositories

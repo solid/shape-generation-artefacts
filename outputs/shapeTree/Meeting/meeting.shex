@@ -1,0 +1,21 @@
+PREFIX cal:   <http://www.w3.org/2002/12/cal/ical#>
+PREFIX meeting: <http://www.w3.org/ns/pim/meeting#>
+PREFIX ns:    <http://www.w3.org/2006/vcard/ns#>
+PREFIX ui:    <http://www.w3.org/ns/ui#>
+PREFIX dc:    <http://purl.org/dc/elements/1.1/>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+###################################################
+# Meeting Form
+###################################################
+
+<MeetingShape> {
+    cal:summary xsd:string ;            # title of meeting
+    cal:location xsd:string ? ;         # optional location
+    cal:dtstart xsd:date ;              # start date
+    cal:dtend xsd:date ;                # end date
+    cal:comment xsd:string ? ;          # optional comment
+    ui:backgroundColor xsd:string ?     # optional tab color
+}
+

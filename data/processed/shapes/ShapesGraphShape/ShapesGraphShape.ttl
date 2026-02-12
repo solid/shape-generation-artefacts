@@ -1,0 +1,14 @@
+@prefix : <http://www.example.org/ns/example#> .
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix shsh: <http://www.w3.org/ns/shacl-shacl#> .
+
+shsh:ShapesGraphShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf sh:shapesGraph ;
+	sh:nodeKind sh:IRI .                # shapesGraph-nodeKind
+
+# Source file: ../data/raw/shacl/SolidOS_form_playground_examples_shacl_shacl_ttl.ttl

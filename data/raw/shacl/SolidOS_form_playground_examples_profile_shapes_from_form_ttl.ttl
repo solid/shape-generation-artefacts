@@ -1,0 +1,753 @@
+     @prefix : <http://www.w3.org/ns/ui#> .
+    @prefix dct: <http://purl.org/dc/terms/> .
+    @prefix esco: <http://data.europa.eu/esco/model#> .
+    @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+    @prefix forms: <profileFormText.ttl#> .
+    @prefix log: <http://www.w3.org/2000/10/swap/log#> .
+    @prefix org: <http://www.w3.org/ns/org#> .
+    @prefix owl: <http://www.w3.org/2002/07/owl#> .
+    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+    @prefix schema: <http://schema.org/> .
+    @prefix sh: <http://www.w3.org/ns/shacl#> .
+    @prefix shapes: <profile-shapes-from-form.ttl#> .
+    @prefix solid: <http://www.w3.org/ns/solid/terms#> .
+    @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+    @prefix wd: <http://www.wikidata.org/entity/> .
+    @prefix xf: <http://www.w3.org/ns/pim/xform#> .
+    @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+    
+     @forSome <#_g0> .
+    
+    shapes:ProfileShape     a sh:NodeShape;
+         dct:title "Profile shape from form";
+         xf:nodeShapeForForm forms:CVGroup,
+                forms:pronounsForm,
+                forms:styleGroup,
+                forms:this;
+         sh:closed true;
+         sh:property  [
+             a sh:PropertyShape;
+             xf:propertyShapeForField forms:highlightColor;
+             sh:datatype xsd:color;
+             sh:name "Highlight color";
+             sh:path solid:profileHighlightColor;
+             sh:pattern "^\\s*#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]([0-9a-f][0-9a-f])?\\s*$" ],
+                 [
+             a sh:PropertyShape;
+             xf:propertyShapeForField forms:backgroundColor;
+             sh:datatype xsd:color;
+             sh:name "Background color";
+             sh:path solid:profileBackgroundColor;
+             sh:pattern "^\\s*#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]([0-9a-f][0-9a-f])?\\s*$" ],
+                 [
+             a sh:PropertyShape;
+             xf:propertyShapeForField forms:relativePronounForm;
+             sh:datatype xsd:string;
+             sh:name "his/hers/theirs...";
+             sh:path solid:preferredRelativePronoun ],
+                 [
+             a sh:PropertyShape;
+             xf:propertyShapeForField forms:objectPronounForm;
+             sh:datatype xsd:string;
+             sh:name "him/her/them...";
+             sh:path solid:preferredObjectPronoun ],
+                 [
+             a sh:PropertyShape;
+             xf:propertyShapeForField forms:subjectPronounForm;
+             sh:datatype xsd:string;
+             sh:name "he/she/they...";
+             sh:path solid:preferredSubjectPronoun ],
+                 [
+             a sh:PropertyShape;
+             xf:propertyShapeForField forms:involvementWithOrganizationsForm;
+             sh:name "Involvement with Organization";
+             sh:node  [
+                 a sh:NodeShape;
+                 xf:nodeShapeForForm forms:RoleMembershipForm;
+                 sh:property  [
+                     a sh:PropertyShape;
+                     xf:propertyShapeForField forms:RoleDescriptionForm;
+                     sh:datatype xsd:string;
+                     sh:name "Describe your role";
+                     sh:path schema:description ],
+                         [
+                     a sh:PropertyShape;
+                     xf:propertyShapeForField forms:orgField;
+                     sh:name "Organization"@en,
+                            "Organization"@fr;
+                     sh:path org:organization ],
+                         [
+                     a sh:PropertyShape;
+                     xf:propertyShapeForField forms:escoOccupationField;
+                     sh:name "occupation";
+                     sh:path org:role ],
+                         [
+                     a sh:PropertyShape;
+                     xf:propertyShapeForField forms:roleNameField;
+                     sh:datatype xsd:string;
+                     sh:path vcard:role ] ];
+             sh:path org:member,
+                    <#_g0> ],
+                 [
+             a sh:PropertyShape;
+             xf:propertyShapeForField forms:SkillsForm;
+             sh:name "Skills";
+             sh:node  [
+                 a sh:NodeShape;
+                 xf:nodeShapeForForm forms:SkillForm;
+                 sh:property  [
+                     a sh:PropertyShape;
+                     xf:propertyShapeForField forms:escoSkillField;
+                     sh:name "skill";
+                     sh:path solid:publicId ] ];
+             sh:path schema:skills ],
+                 [
+             a sh:PropertyShape;
+             xf:propertyShapeForField forms:LanguagesForm;
+             sh:name "Languages";
+             sh:path schema:knowsLanguage;
+             sh:property  [
+                 a sh:PropertyShape;
+                 sh:node  [
+                     a sh:NodeShape;
+                     sh:property  [
+                         sh:node  [
+                             a sh:NodeShape;
+                             xf:nodeShapeForForm forms:LanguageForm;
+                             sh:property  [
+                                 a sh:PropertyShape;
+                                 xf:propertyShapeForField forms:WikidataLanguageField;
+                                 sh:name "Language";
+                                 sh:path solid:publicId ] ];
+                         sh:path  (
+                         [
+                                 sh:zeroOrMorePath rdf:rest ]
+                        rdf:first ) ] ];
+                 sh:path schema:knowsLanguage;
+                 sh:targetClass rdf:Collection ] ],
+                 [
+             a sh:PropertyShape;
+             xf:propertyShapeForField forms:nicknameField;
+             sh:datatype xsd:string;
+             sh:name "Short name for chats, etc."@en,
+                    "nom court"@fr;
+             sh:path foaf:nick ];
+         sh:targetClass schema:Person,
+                vcard:Individual,
+                foaf:Person .
+    
+    forms:CVGroup     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:CVHeading
+        forms:CVPrompt
+        forms:involvementWithOrganizationsForm );
+         :weight 1 .
+    
+    forms:CVHeading     a log:Chaff,
+                :Heading;
+         :contents "Public Curriculum Vitae" .
+    
+    forms:CVPrompt     a log:Chaff,
+                :Comment;
+         :contents "What organizations have you been involved with?" .
+    
+    forms:CorporationAutocomplete     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataInstancesByName;
+         :label "Corporation in wikidata";
+         :property solid:publicId;
+         :size 60;
+         :targetClass wd:Q6881511 .
+    
+    forms:CorporationForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:CorporationPrompt
+        forms:CorporationAutocomplete );
+         :weight 0 .
+    
+    forms:CorporationPrompt     a log:Chaff,
+                :Comment;
+         :contents "Which corporation?" .
+    
+    forms:ESCO_Occupation_DataSource     a log:Chaff,
+                :DataSource;
+         schema:logo <https://ec.europa.eu/esco/portal/static_resource2/images/logo/logo_en.gif>;
+         schema:name "ESCO";
+         :searchByNameURI "https://ec.europa.eu/esco/api/search?language=$(language)&type=occupation&text=$(name)";
+         :targetClass schema:Occupation .
+    
+    forms:ESCO_Skill_DataSource     a log:Chaff,
+                :DataSource;
+         schema:logo <https://ec.europa.eu/esco/portal/static_resource2/images/logo/logo_en.gif>;
+         schema:name "ESCO Skill";
+         :searchByNameURI "https://ec.europa.eu/esco/api/search?language=$(language)&limit=$(limit)&type=skill&text=$(name)";
+         :targetClass esco:Skill .
+    
+    forms:EducationalOrganizationAutocomplete     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataInstancesByName;
+         :label "Educational Organization in wikidata";
+         :property solid:publicId;
+         :size 60;
+         :targetClass wd:Q2385804 .
+    
+    forms:EducationalOrganizationForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:EducationalOrganizationPrompt
+        forms:EducationalOrganizationAutocomplete );
+         :weight 1 .
+    
+    forms:EducationalOrganizationPrompt     a log:Chaff,
+                :Comment;
+         :contents "Which Educational Organization?" .
+    
+    forms:EndDateForm     a log:Chaff,
+                :DateField;
+         :label "end"@en,
+                "fin"@fr;
+         :property schema:endDate .
+    
+    forms:GovernmentOrganizationAutocomplete     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataInstancesByName;
+         :label "GovernmentOrganization in wikidata";
+         :property solid:publicId;
+         :size 60;
+         :targetClass wd:Q327333 .
+    
+    forms:GovernmentOrganizationForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:GovernmentOrganizationPrompt
+        forms:GovernmentOrganizationAutocomplete );
+         :weight 0 .
+    
+    forms:GovernmentOrganizationPrompt     a log:Chaff,
+                :Comment;
+         :contents "Which GovernmentOrganization?" .
+    
+    forms:LanguageForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:WikidataLanguageField );
+         :weight 1 .
+    
+    forms:LanguagesForm     a log:Chaff,
+                :Multiple;
+         sh:effectiveProperty schema:knowsLanguage;
+         :label "Languages";
+         :ordered true;
+         :part forms:LanguageForm;
+         :property schema:knowsLanguage;
+         :reverse false .
+    
+    forms:LanguagesPrompt     a log:Chaff,
+                :Comment;
+         :contents "Languages?" .
+    
+    forms:MembershipFormHeading     a log:Chaff,
+                :Heading;
+         :contents "Details of this role"@en,
+                "Détailes de ce rôle"@fr .
+    
+    forms:NGOAutocomplete     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataInstancesByName;
+         :label "NGO in wikidata";
+         :property solid:publicId;
+         :size 60;
+         :targetClass wd:Q163740 .
+    
+    forms:NGOForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:NGOPrompt
+        forms:NGOAutocomplete );
+         :weight 0 .
+    
+    forms:NGOPrompt     a log:Chaff,
+                :Comment;
+         :contents "Which NGO?" .
+    
+    forms:OrgClassifier     a log:Chaff,
+                :Classifier;
+         :category solid:InterestingOrganization;
+         :label "What sort of organization?"@en .
+    
+    forms:OrgSwitch     a log:Chaff,
+                :Options;
+         :case  [
+             :for schema:Corporation;
+             :use forms:CorporationForm ],
+                 [
+             :for schema:GovernmentOrganization;
+             :use forms:GovernmentOrganizationForm ],
+                 [
+             :for schema:PerformingGroup;
+             :use forms:PerformingGroupForm ],
+                 [
+             :for schema:Project;
+             :use forms:ProjectForm ],
+                 [
+             :for schema:NGO;
+             :use forms:NGOForm ],
+                 [
+             :for schema:EducationalOrganization;
+             :use forms:EducationalOrganizationForm ],
+                 [
+             :for schema:ResearchOrganization;
+             :use forms:ResearchOrganizationForm ],
+                 [
+             :for forms:SportsOrganization;
+             :use forms:SportsOrganizationForm ],
+                 [
+             :for solid:OtherOrganization;
+             :use forms:OtherOrganizationForm ];
+         :dependingOn rdf:type .
+    
+    forms:OrganizationCreationForm     a log:Chaff,
+                :Form;
+         schema:name "Form for editing an organization using public data";
+         :parts  (
+        forms:OrgClassifier
+        forms:OrgSwitch
+        forms:OrganizationNameField
+        forms:homePageURIField ) .
+    
+    forms:OrganizationNameField     a log:Chaff,
+                :SingleLineTextField;
+         :label "Organization Name";
+         :maxLength "200";
+         :property schema:name;
+         :size 80 .
+    
+    forms:OtherOrganizationForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:OrganizationNameField
+        forms:homePageURIField );
+         :weight 0 .
+    
+    forms:PerformingGroupAutocomplete     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataInstancesByName;
+         :label "PerformingGroup in wikidata";
+         :property solid:publicId;
+         :size 60;
+         :targetClass wd:Q32178211 .
+    
+    forms:PerformingGroupForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:PerformingGroupPrompt
+        forms:PerformingGroupAutocomplete );
+         :weight 0 .
+    
+    forms:PerformingGroupPrompt     a log:Chaff,
+                :Comment;
+         :contents "Which PerformingGroup?" .
+    
+    forms:ProjectAutocomplete     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataInstancesByName;
+         :label "Project in wikidata";
+         :property solid:publicId;
+         :size 60;
+         :targetClass wd:Q170584 .
+    
+    forms:ProjectForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:ProjectPrompt
+        forms:ProjectAutocomplete );
+         :weight 0 .
+    
+    forms:ProjectPrompt     a log:Chaff,
+                :Comment;
+         :contents "Which Project?" .
+    
+    forms:ResearchOrganizationAutocomplete     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataInstancesByName;
+         :label "Research Insitute in wikidata";
+         :property solid:publicId;
+         :size 60;
+         :targetClass wd:Q31855 .
+    
+    forms:ResearchOrganizationForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:ResearchOrganizationPrompt
+        forms:ResearchOrganizationAutocomplete );
+         :weight 0 .
+    
+    forms:ResearchOrganizationPrompt     a log:Chaff,
+                :Comment;
+         :contents "Which Research Organization?" .
+    
+    forms:RoleClassifier     a log:Chaff,
+                :Classifier;
+         :category solid:Role;
+         :label "What sort of role?"@en .
+    
+    forms:RoleDatesForm     a log:Chaff,
+                :Options;
+         :case  [
+             :for solid:PastRole;
+             :use forms:TwoDateForm ],
+                 [
+             :for solid:CurrentRole;
+             :use forms:StartDateForm ],
+                 [
+             :for solid:FutureRole;
+             :use forms:StartDateForm ];
+         :dependingOn rdf:type .
+    
+    forms:RoleDatesGroup     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:RoleClassifier
+        forms:RoleDatesForm );
+         :weight 0 .
+    
+    forms:RoleDescriptionForm     a log:Chaff,
+                :MultiLineTextField;
+         :label "Describe your role";
+         :property schema:description .
+    
+    forms:RoleMembershipForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:MembershipFormHeading
+        forms:roleNameField
+        forms:escoOccupationField
+        forms:orgField
+        forms:RoleClassifier
+        forms:RoleDatesForm
+        forms:RoleDescriptionForm );
+         :weight 3 .
+    
+    forms:SkillForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:escoSkillField );
+         :weight 1 .
+    
+    forms:SkillsForm     a log:Chaff,
+                :Multiple;
+         sh:effectiveProperty schema:skills;
+         :label "Skills";
+         :ordered false;
+         :part forms:SkillForm;
+         :property schema:skills;
+         :reverse false .
+    
+    forms:SkillsPrompt     a log:Chaff,
+                :Comment;
+         :contents "Skills?" .
+    
+    forms:SportsOrganizationAutocomplete     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataInstancesByName;
+         :label "SportsOrganization in wikidata";
+         :property solid:publicId;
+         :size 60;
+         :targetClass wd:Q4438121 .
+    
+    forms:SportsOrganizationForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:SportsOrganizationPrompt
+        forms:SportsOrganizationAutocomplete );
+         :weight 0 .
+    
+    forms:SportsOrganizationPrompt     a log:Chaff,
+                :Comment;
+         :contents "Which Sports Organization?" .
+    
+    forms:StartDateForm     a log:Chaff,
+                :DateField;
+         :label "début"@fr,
+                "start"@en;
+         :property schema:startDate .
+    
+    forms:TwoDateForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:StartDateForm
+        forms:EndDateForm );
+         :weight 0 .
+    
+    forms:WikidataInstancesByName     a log:Chaff,
+                :DataSource;
+         schema:name "Wikidata instances by name";
+         :endpoint "https://query.wikidata.org/sparql";
+         :searchByName  [
+         ];
+         :searchByNameQuery """SELECT ?subject ?name
+        WHERE {
+          ?klass wdt:P279* $(targetClass) .
+          ?subject wdt:P31 ?klass .
+          ?subject rdfs:label ?name.
+          FILTER regex(?name, "$(name)", "i")
+        } LIMIT $(limit) """ .
+    
+    forms:WikidataLanguageDataSource     a log:Chaff,
+                :DataSource;
+         schema:name "Wikidata languages";
+         :endpoint "https://query.wikidata.org/sparql";
+         :objectURIBase <https://www.w3.org/ns/iana/language-code/>;
+         :searchByNameQuery """SELECT ?item ?subject ?name
+WHERE
+{ ?item wdt:P305 ?subject .
+  OPTIONAL {?item rdfs:label ?name}
+  OPTIONAL {?item wdt:P1705 ?name}
+  FILTER regex(?name, "$(name)", "i")
+  FILTER regex(?subject, "^..$", "i")
+}""" .
+    
+    forms:WikidataLanguageField     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataLanguageDataSource;
+         :label "Language";
+         :property solid:publicId;
+         :size 30;
+         :targetClass schema:Language .
+    
+    forms:WikidataOnOrganizations     a log:Chaff,
+                :DataSource;
+         schema:name "Wikidata";
+         :classMap  [
+             :externalClass wd:Q6881511;
+             :internalClass schema:Corporation ],
+                 [
+             :externalClass wd:Q178706;
+             :internalClass schema:EducationalOrganization ],
+                 [
+             :externalClass wd:Q31855;
+             :internalClass schema:ResearchOrganization ],
+                 [
+             :externalClass wd:Q327333;
+             :internalClass schema:GovernmentOrganization ],
+                 [
+             :externalClass wd:Q4287745;
+             :internalClass schema:MedicalOrganization ],
+                 [
+             :externalClass wd:Q32178211;
+             :internalClass schema:MusicGroup ],
+                 [
+             :externalClass wd:Q163740;
+             :internalClass schema:NGO ],
+                 [
+             :externalClass wd:Q28640;
+             :internalClass schema:Occupation ],
+                 [
+             :externalClass wd:Q43229;
+             :internalClass schema:Organization ],
+                 [
+             :externalClass wd:Q170584;
+             :internalClass schema:Project ],
+                 [
+             :externalClass wd:Q4438121;
+             :internalClass schema:SportsOrganization ];
+         :endpoint "https://query.wikidata.org/sparql";
+         :searchByNameQuery """SELECT ?subject ?name
+       WHERE {
+         ?klass wdt:P279* $(targetClass) .
+         ?subject wdt:P31 ?klass .
+         ?subject rdfs:label ?name.
+         FILTER regex(?name, "$(name)", "i")
+       } LIMIT $(limit) """;
+         :targetClass wd:Q43229 .
+    
+    forms:backgroundColor     a log:Chaff,
+                :ColorField;
+         :default "#ffffff";
+         :label "Background color";
+         :property solid:profileBackgroundColor .
+    
+    forms:escoOccupationField     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:ESCO_Occupation_DataSource;
+         :label "occupation";
+         :property org:role;
+         :size 60;
+         :targetClass schema:Occupation .
+    
+    forms:escoSkillField     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:ESCO_Skill_DataSource;
+         :label "skill";
+         :property solid:publicId;
+         :size 30;
+         :targetClass schema:Skill .
+    
+    forms:highlightColor     a log:Chaff,
+                :ColorField;
+         :default "#000000";
+         :label "Highlight color";
+         :property solid:profileHighlightColor .
+    
+    forms:homePageURIField     a log:Chaff,
+                :NamedNodeURIField;
+         :label "Home page URI"@en;
+         :property schema:uri;
+         :size 80 .
+    
+    forms:initituteTypeField     a log:Chaff,
+                :Classifier;
+         :category solid:InterestingOrganization;
+         :label "What sort of organization" .
+    
+    forms:instituteIdentityField     a log:Chaff,
+                :AutocompleteField;
+         :dataSource forms:WikidataOnOrganizations;
+         :label "in wikidata";
+         :property solid:publicId;
+         :size 60 .
+    
+    forms:involvementWithOrganizationsForm     a log:Chaff,
+                :Multiple;
+         sh:effectiveProperty <#_g0>;
+         :label "Involvement with Organization";
+         :ordered false;
+         :part forms:RoleMembershipForm;
+         :property org:member;
+         :reverse true .
+    
+    forms:nicknameField     a log:Chaff,
+                :SingleLineTextField;
+         :label "Short name for chats, etc."@en,
+                "nom court"@fr;
+         :property foaf:nick;
+         :size 12 .
+    
+    forms:objectPronounForm     a log:Chaff,
+                :SingleLineTextField;
+         :label "him/her/them...";
+         :property solid:preferredObjectPronoun;
+         :size 10 .
+    
+    forms:orgField     a log:Chaff,
+                :Choice;
+         :canMintNew true;
+         :from vcard:Organization;
+         :label "Organization"@en,
+                "Organization"@fr;
+         :property org:organization;
+         :use forms:OrganizationCreationForm .
+    
+    forms:pronounsForm     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:pronounsPrompt
+        forms:subjectPronounForm
+        forms:objectPronounForm
+        forms:relativePronounForm );
+         :weight 0 .
+    
+    forms:pronounsPrompt     a log:Chaff,
+                :Comment;
+         :contents "What are your pronouns?" .
+    
+    forms:relativePronounForm     a log:Chaff,
+                :SingleLineTextField;
+         :label "his/hers/theirs...";
+         :property solid:preferredRelativePronoun;
+         :size 10 .
+    
+    forms:roleNameField     a log:Chaff,
+                :SingleLineTextField;
+         :property vcard:role;
+         :size 60 .
+    
+    forms:styleGroup     a log:Chaff,
+                :Group;
+         :parts  (
+        forms:styleHeading
+        forms:backgroundColor
+        forms:highlightColor );
+         :weight 0 .
+    
+    forms:styleHeading     a log:Chaff,
+                :Heading;
+         :contents "The style of your public profile." .
+    
+    forms:subjectPronounForm     a log:Chaff,
+                :SingleLineTextField;
+         :label "he/she/they...";
+         :property solid:preferredSubjectPronoun;
+         :size 10 .
+    
+    forms:this     a log:Chaff,
+                :Form;
+         <http://purl.org/dc/elements/1.1/title> "Profile form";
+         :parts  (
+        forms:styleGroup
+        forms:nicknameField
+        forms:pronounsForm
+        forms:LanguagesPrompt
+        forms:LanguagesForm
+        forms:CVGroup
+        forms:SkillsPrompt
+        forms:SkillsForm ) .
+    
+    schema:ResearchOrganization     a rdfs:Class;
+         rdfs:label "Forschungsorganisation"@de,
+                "Organization de Recherche"@fr,
+                "Research Organization"@en,
+                "organización de investigación"@es,
+                "shirika la utafiti"@sw,
+                "منظمة البحث"@ar,
+                "अनुसंधान संगठन"@hi .
+    
+    vcard:Organization     :creationForm forms:OrganizationCreationForm .
+    
+    org:member     owl:inverse  [
+             :label "involvement with company, org etc" ] .
+    
+    solid:CurrentRole     a rdfs:Class;
+         rdfs:label "current role"@en,
+                "momentane Rolle"@de,
+                "rol actual"@es,
+                "rôle actuel"@fr .
+    
+    solid:FutureRole     a rdfs:Class;
+         rdfs:label "future role"@en,
+                "rol futuro"@es,
+                "rôle à venir"@fr,
+                "zukünftige Rolle"@de .
+    
+    solid:InterestingOrganization     owl:disjointUnionOf  (
+        schema:Corporation
+        schema:EducationalOrganization
+        schema:ResearchOrganization
+        schema:GovernmentOrganization
+        schema:NGO
+        schema:PerformingGroup
+        schema:Project
+        schema:SportsOrganization
+        solid:OtherOrganization ) .
+    
+    solid:PastRole     a rdfs:Class;
+         rdfs:label "ancien rôle"@fr,
+                "former role"@en,
+                "rol anterior"@es,
+                "vergangene Rolle"@de .
+    
+    solid:Role     a rdfs:Class;
+         owl:disjointUnionOf  (
+        solid:PastRole
+        solid:CurrentRole
+        solid:FutureRole );
+         owl:oneOf  (
+        solid:CurrentRole
+        solid:FormerRole
+        solid:FutureRole ) .
+    
+    <#_g0>     sh:inversePath org:member .
+    

@@ -1,0 +1,71 @@
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc:     <http://purl.org/dc/elements/1.1/>
+PREFIX foaf:   <http://xmlns.com/foaf/0.1/>
+PREFIX terms:  <http://purl.org/dc/terms/>
+PREFIX flow:   <http://www.w3.org/2005/01/wf/flow#>
+PREFIX ical:   <http://www.w3.org/2002/12/cal/ical#>
+PREFIX mee:    <http://www.w3.org/ns/pim/meeting#>
+PREFIX schema: <http:/schema.org/>
+PREFIX sioc:   <http://rdfs.org/sioc/ns#>
+PREFIX solid:  <http://www.w3.org/ns/solid/terms#>
+PREFIX ui:     <http://www.w3.org/ns/ui#>
+
+###################################################
+# Chat Channel
+###################################################
+
+<ChatChannelShape> {
+    rdf:type [ mee:LongChat ] COUNT 1 ;
+    dc:author IRI COUNT 1 ;
+    dc:title xsd:string COUNT 1 ;
+    dc:created xsd:dateTime COUNT 1 ;
+    ui:sharedPreferences @<SharedPreferencesShape> COUNT 1 ;
+    flow:participation @<ParticipationShape>* ;
+}
+
+###################################################
+# Shared Preferences
+###################################################
+
+<SharedPreferencesShape> {
+    solid:expandImagesInline xsd:boolean? MAX 1 ;
+    solid:inlineImageHeightEms xsd:integer? MAX 1 ;
+    solid:newestFirst xsd:boolean? MAX 1 ;
+}
+
+###################################################
+# Participation object
+###################################################
+
+<ParticipationShape> {
+    ical:dtstart xsd:dateTime COUNT 1 ;
+    flow:participant IRI COUNT 1 ;
+    solid:colorizeByAuthor xsd:boolean? MAX 1 ;
+    solid:expandImagesInline xsd:boolean? MAX 1 ;
+    solid:inlineImageHeightEms xsd:integer? MAX 1 ;
+    solid:newestFirst xsd:boolean? MAX 1 ;
+    ui:backgroundColor xsd:string? PATTERN "#[0-9a-fA-F]{6}" MAX 1 ;
+}
+
+###################################################
+# Messages
+###################################################
+
+<MessageShape> {
+    terms:created xsd:dateTime COUNT 1 ;
+    foaf:maker IRI COUNT 1 ;
+    sioc:content xsd:string COUNT 1 ;
+    ^flow:message @<ParticipationShape> COUNT 1 ;  # inverse path
+}
+
+###################################################
+# Actions (express sentiments)
+###################################################
+
+<ActionShape> {
+    rdf:type IRI COUNT 1 ;      # subclass of schema:Action
+    schema:agent IRI COUNT 1 ;
+    schema:target IRI COUNT 1 ;
+}

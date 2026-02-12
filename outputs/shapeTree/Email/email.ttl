@@ -1,0 +1,35 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
+@prefix : <#>.
+
+<> rdfs:label "Shape file for VCARD data in Solid";
+  rdfs:comment """The shapes in this file define the way
+  contact information is stored in Solid.  Importantly, this shape,
+  defined in the 2014 Note "vCard Ontology - for describing People and Organizations",
+  allows direct conversion to and from the widley deployed VCARD format,
+  so users should be able import and export and ideally sync their contacts
+  between their Solid pod and other systems.
+
+  Note that VCARD has a URL field with a type which allows us to carry
+  web URIs such as a hompage URI, a public RDF URI in public data such as dbpedia
+  and wikidata, and, critically, a Solid WebID.
+  """.
+
+
+####### email
+
+:EmailShape a sh:NodeShape;
+  sh:targetObjectsOf vcard:hasEmail;
+  sh:property [
+   sh:path vcard:value;
+        sh:pattern "^mailto:" ;    # starts with mailto
+   sh:count 1;
+  ].
+
+# ends
+
+# Source file: ../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl

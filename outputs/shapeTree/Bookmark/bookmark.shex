@@ -1,0 +1,64 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bk: <http://www.w3.org/2002/01/bookmark#>
+PREFIX solid: <http://www.w3.org/ns/solid/terms#>
+PREFIX : <#>
+
+#################################################
+# Bookmark Type Shape
+#################################################
+:BookmarkTypeShape {
+    rdf:type IRI ;               # default "http://www.w3.org/2002/01/bookmark#Bookmark"
+}
+
+#################################################
+# Search Topic Shape
+#################################################
+:SearchTopicShape {
+    bk:hasTopic xsd:string ? ;  # optional, single-line text
+}
+
+#################################################
+# Bookmark Label Shape
+#################################################
+:BookmarkLabelShape {
+    rdfs:label xsd:string ? ;   # optional
+}
+
+#################################################
+# Bookmark URL Shape
+#################################################
+:BookmarkUrlShape {
+    bk:recalls IRI ? ;          # optional, must be a URI
+}
+
+#################################################
+# Bookmark Topic Shape
+#################################################
+:BookmarkTopicShape {
+    bk:hasTopic xsd:string ? ;  # optional
+}
+
+#################################################
+# Bookmark Description Shape
+#################################################
+:BookmarkDescriptionShape {
+    rdfs:comment xsd:string ? ; # optional, multi-line text
+}
+
+#################################################
+# News Form Shape (combines fields)
+#################################################
+:NewsFormShape {
+    rdfs:label xsd:string ? ;
+    bk:recalls IRI ? ;
+    bk:hasTopic xsd:string ? ;
+}
+
+#################################################
+# Search Form Shape (combines fields)
+#################################################
+:SearchFormShape {
+    rdfs:label xsd:string ? ;
+    bk:recalls IRI ? ;
+}

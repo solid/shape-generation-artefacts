@@ -1,0 +1,38 @@
+@prefix : <http://www.example.org/ns/example#> .
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix shsh: <http://www.w3.org/ns/shacl-shacl#> .
+
+shsh:ListNodeShape
+	a sh:NodeShape ;
+	rdfs:label "List node shape"@en ;
+	rdfs:comment "Defines constraints on what it means for a node to be a node within a well-formed RDF list. Note that this does not check whether the rdf:rest items are also well-formed lists as this would lead to unsupported recursion."@en ;
+	sh:or ( [
+				sh:hasValue rdf:nil ;
+        		sh:property [
+					sh:path rdf:first ;
+					sh:maxCount 0 ;
+				] ;
+				sh:property [
+					sh:path rdf:rest ;
+					sh:maxCount 0 ;
+				] ;
+			]
+			[
+				sh:not [ sh:hasValue rdf:nil ] ;
+				sh:property [
+					sh:path rdf:first ;
+					sh:maxCount 1 ;
+					sh:minCount 1 ;
+				] ;
+				sh:property [
+					sh:path rdf:rest ;
+					sh:maxCount 1 ;
+					sh:minCount 1 ;
+				] ;
+			] ) .
+
+# Source file: ../data/raw/shacl/SolidOS_form_playground_examples_shacl_shacl_ttl.ttl

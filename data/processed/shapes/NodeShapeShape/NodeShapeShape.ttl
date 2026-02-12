@@ -1,0 +1,41 @@
+@prefix : <http://www.example.org/ns/example#> .
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix shsh: <http://www.w3.org/ns/shacl-shacl#> .
+
+shsh:NodeShapeShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf sh:node ;        # node-node
+	sh:property [
+		sh:path sh:path ;
+		sh:maxCount 0 ;                 # NodeShape-path-maxCount
+	] ;
+	sh:property [
+		sh:path sh:lessThan ;
+		sh:maxCount 0 ;                 # lessThan-scope
+	] ;
+	sh:property [
+		sh:path sh:lessThanOrEquals ;
+		sh:maxCount 0 ;                 # lessThanOrEquals-scope
+	] ;
+	sh:property [
+		sh:path sh:maxCount ;
+		sh:maxCount 0 ;                 # maxCount-scope
+	] ;
+	sh:property [
+		sh:path sh:minCount ;
+		sh:maxCount 0 ;                 # minCount-scope
+	] ;
+	sh:property [
+		sh:path sh:qualifiedValueShape ;
+		sh:maxCount 0 ;                 # qualifiedValueShape-scope
+	] ;
+	sh:property [
+		sh:path sh:uniqueLang ;
+		sh:maxCount 0 ;                 # uniqueLang-scope
+	] .
+
+# Source file: ../data/raw/shacl/SolidOS_form_playground_examples_shacl_shacl_ttl.ttl

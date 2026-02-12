@@ -1,0 +1,27 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ui: <http://www.w3.org/ns/ui#>
+PREFIX : <#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# ----------------------------
+# Boolean fields
+# ----------------------------
+
+:ColorizeFieldShape {
+  a ui:BooleanField ;
+  ui:label xsd:string ;
+}
+
+:ExpandImagesInlineShape {
+  a ui:BooleanField ;
+  ui:label xsd:string ;
+}
+
+# ----------------------------
+# Top-level form shape
+# ----------------------------
+
+:ChatPreferencesFormShape {
+  :colorizeField @:ColorizeFieldShape ;
+  :expandImagesInline @:ExpandImagesInlineShape ;
+}

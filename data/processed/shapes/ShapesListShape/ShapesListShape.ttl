@@ -1,0 +1,31 @@
+@prefix : <http://www.example.org/ns/example#> .
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix shsh: <http://www.w3.org/ns/shacl-shacl#> .
+
+shsh:ShapesListShape
+	a sh:NodeShape ;
+	sh:targetObjectsOf sh:and ;         # and-members-node
+	sh:targetObjectsOf sh:or ;          # or-members-node
+	sh:targetObjectsOf sh:xone ;        # xone-members-node
+	sh:property [
+		sh:path ( [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ;
+		sh:node shsh:ShapeShape ;
+	] .
+
+
+# A path of blank node path syntax, used to simulate recursion
+_:PathPath
+	sh:alternativePath (
+		( [ sh:zeroOrMorePath rdf:rest ] rdf:first )
+		( sh:alternativePath [ sh:zeroOrMorePath rdf:rest ] rdf:first )
+		sh:inversePath
+		sh:zeroOrMorePath
+		sh:oneOrMorePath
+		sh:zeroOrOnePath 
+	) .
+
+# Source file: ../data/raw/shacl/SolidOS_form_playground_examples_shacl_shacl_ttl.ttl

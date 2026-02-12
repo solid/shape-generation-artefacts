@@ -1,0 +1,61 @@
+PREFIX dc:    <http://purl.org/dc/elements/1.1/>
+PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+PREFIX cal:   <http://www.w3.org/2002/12/cal/ical#>
+PREFIX sched: <http://www.w3.org/ns/pim/schedule#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+#################################################
+# Main Event Shape
+#################################################
+
+<VeventShape> {
+    cal:summary xsd:string ;
+    cal:location xsd:string ? ;
+    cal:comment xsd:string ? ;
+
+    sched:allDay xsd:boolean ;
+
+    # Duration depends on allDay
+    (
+        sched:durationInDays xsd:integer {1,}
+      |
+        sched:durationInMinutes xsd:integer {1,}
+    ) ;
+
+    # At least one author required
+    dc:author @<AuthorShape> + ;
+
+    # At least two scheduling options required
+    sched:option @<OptionShape> {2,} ;
+
+    # At least one invitee required
+    sched:invitee @<InviteeShape> +
+}
+
+#################################################
+# Author Shape
+#################################################
+
+<AuthorShape> {
+    foaf:name xsd:string ;
+    foaf:mbox xsd:string
+}
+
+#################################################
+# Invitee Shape
+#################################################
+
+<InviteeShape> {
+    foaf:mbox xsd:string
+}
+
+#################################################
+# Option Shape
+# (All-day uses date only, otherwise dateTime)
+#################################################
+
+<OptionShape> {
+    cal:dtstart xsd:date
+  |
+    cal:dtstart xsd:dateTime
+}

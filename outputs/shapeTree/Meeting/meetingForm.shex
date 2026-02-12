@@ -1,0 +1,99 @@
+PREFIX f: <#>
+PREFIX cal: <http://www.w3.org/2002/12/cal/ical#>
+PREFIX meeting: <http://www.w3.org/ns/pim/meeting#>
+PREFIX ui: <http://www.w3.org/ns/ui#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# ----------------------------
+# Meeting Details Form
+# ----------------------------
+:TitleFieldShape {
+  a f:SingleLineTextField ;
+  :label xsd:string ;
+  :property cal:summary ;
+  :maxLength xsd:integer ;
+  :size xsd:integer ;
+}
+
+:LocationFieldShape {
+  a f:SingleLineTextField ;
+  :label xsd:string ;
+  :property cal:location ;
+  :maxLength xsd:integer ;
+  :size xsd:integer ;
+}
+
+:StartFieldShape {
+  a f:DateField ;
+  :label xsd:string ;
+  :property cal:dtstart ;
+}
+
+:EndFieldShape {
+  a f:DateField ;
+  :label xsd:string ;
+  :property cal:dtend ;
+}
+
+:ColorFieldShape {
+  a f:ColorField ;
+  :label xsd:string ;
+  :property ui:backgroundColor ;
+}
+
+:EventCommentShape {
+  a f:MultiLineTextField ;
+  :property cal:comment ;
+}
+
+:MeetingDetailsFormShape {
+  a f:Form ;
+  :part @:TitleFieldShape ;
+  :part @:LocationFieldShape ;
+  :part @:StartFieldShape ;
+  :part @:EndFieldShape ;
+  :part @:ColorFieldShape ;
+  :part @:EventCommentShape ;
+}
+
+# ----------------------------
+# Tab Settings Form
+# ----------------------------
+:LabelFieldShape {
+  a f:SingleLineTextField ;
+  :label xsd:string ;
+  :property rdfs:label ;
+  :maxLength xsd:integer ;
+  :size xsd:integer ;
+}
+
+:TargetFieldShape {
+  a f:NamedNodeURIField ;
+  :label xsd:string ;
+  :property meeting:target ;
+  :maxLength xsd:integer ;
+  :size xsd:integer ;
+}
+
+:ColorField2Shape {
+  a f:ColorField ;
+  :label xsd:string ;
+  :property ui:backgroundColor ;
+}
+
+:ViewFieldShape {
+  a f:SingleLineTextField ;
+  :label xsd:string ;
+  :property meeting:view ;
+  :maxLength xsd:integer ;
+  :size xsd:integer ;
+}
+
+:TabSettingsFormShape {
+  a f:Form ;
+  :part @:LabelFieldShape ;
+  :part @:TargetFieldShape ;
+  :part @:ColorField2Shape ;
+  :part @:ViewFieldShape ;
+}

@@ -1,0 +1,17 @@
+# Source file: ../data/raw/shacl/SolidOS_form_playground_examples_hand_profile_shape_ttl.ttl
+
+
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX schema: <http://schema.org/>
+
+###################################################
+# Profile shape for a person
+###################################################
+
+<ProfileShape> {
+    rdf:type [ schema:Person ] OR [ foaf:Person ] OR [ vcard:Individual ] COUNT 1 ;
+    
+    foaf:knows @<ProfileShape>* ;  # Friends are also Persons
+}

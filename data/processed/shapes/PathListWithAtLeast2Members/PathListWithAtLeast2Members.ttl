@@ -1,0 +1,17 @@
+@prefix : <http://www.example.org/ns/example#> .
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix shsh: <http://www.w3.org/ns/shacl-shacl#> .
+
+shsh:PathListWithAtLeast2Members
+	a sh:NodeShape ;
+	sh:node shsh:ListShape ;
+	sh:property [
+		sh:path [ sh:oneOrMorePath rdf:rest ] ;
+		sh:minCount 2 ;    # 1 other list node plus rdf:nil
+	] .
+
+# Source file: ../data/raw/shacl/SolidOS_form_playground_examples_shacl_shacl_ttl.ttl
