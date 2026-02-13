@@ -2,14 +2,14 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix : <#> .
+@prefix ads: <https://solid.github.io/shapes/address#> .
 
 
 #################################################
 # Address Shape
 #################################################
 
-:AddressShape
+ads:AddressShape
     rdfs:label "Address"@en;
     a sh:NodeShape ;
 
