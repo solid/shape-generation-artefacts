@@ -1,0 +1,71 @@
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix schema: <http://schema.org/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix : <#>.
+
+#################################################
+# Person Shape
+
+:PersonShape
+    rdfs:label "Person"@en ;
+    a sh:NodeShape ;
+    sh:targetClass foaf:Agent ;
+
+    sh:property [
+        rdfs:label "Formatted name"@en ;
+        sh:path vcard:fn ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        rdfs:label "Role or Occupation"@en ;
+        sh:path vcard:role ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+    ] ;
+
+    sh:property [
+        rdfs:label "Organization name"@en ;
+        sh:path vcard:organization-name ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+    ] ;
+
+    sh:property [
+        rdfs:label "Postal address"@en ;
+        sh:path vcard:hasAddress ;
+        sh:node :AddressShape ;
+    ] ;
+
+    sh:property [
+        rdfs:label "Email address"@en ;
+        sh:path vcard:hasEmail ;
+        sh:node :EmailShape ;
+    ] ;
+
+    sh:property [
+        rdfs:label "Telephone number"@en ;
+        sh:path vcard:hasTelephone ;
+        sh:node :TelephoneShape ;
+    ] ;
+
+    sh:property [
+        rdfs:label "Date of birth"@en ;
+        sh:path vcard:bday ;
+        sh:datatype xsd:date ;
+    ] ;
+
+    sh:property [
+        rdfs:label "Notes"@en ;
+        sh:path vcard:note ;
+        sh:datatype xsd:string ;
+    ] .
+
+

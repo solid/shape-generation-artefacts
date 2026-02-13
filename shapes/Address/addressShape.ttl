@@ -1,6 +1,7 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix : <#> .
 
 
@@ -9,33 +10,39 @@
 #################################################
 
 :AddressShape
+    rdfs:label "Address"@en;
     a sh:NodeShape ;
 
     sh:property [
+        rdfs:label "Street Address"@en;
         sh:path vcard:street-address ;
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
     ] ;
 
     sh:property [
+        rdfs:label "Locality"@en;
         sh:path vcard:locality ;
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
     ] ;
 
     sh:property [
+        rdfs:label "Postal Code"@en;
         sh:path vcard:postal-code ;
         sh:datatype xsd:string ;
         sh:maxLength 25 ;
     ] ;
 
     sh:property [
+        rdfs:label "Region"@en;
         sh:path vcard:region ;
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
     ] ;
 
     sh:property [
+        rdfs:label "Country Name"@en;
         sh:path vcard:country-name ;
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
