@@ -138,7 +138,7 @@ data/raw/shacl
 
 ## Output Description
 
-The output folder contains *shape trees* - grouped schema and resources that together define an entity. At this time, the [outputs/shapeTrees](./outputs/shapeTrees) folder contains SHEX and SHACL definitions that are derived from files in the SolidOS GitHub repositories, along with references to the source files.
+The output folder contains SHACL shapes that are derived from files in the SolidOS GitHub repositories.
 
 ---
 
@@ -164,5 +164,4 @@ To fully reproduce results:
 ## License
 
 [Code and Data license](LICENSE.md)
-
 
