@@ -1,0 +1,138 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix schema: <http://schema.org/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix solid: <http://www.w3.org/ns/solid/terms#> .
+@prefix cos:  <https://solid.github.io/shapes/OrganizationContact#> .
+
+################################################################
+# Organisation Contact SHACL Shape
+################################################################
+
+ocs:OrganizationContactShape
+    a sh:NodeShape ;
+    rdfs:label "Organization Contact Shape"@en ;
+    rdfs:comment "SHACL shape defining data constraints for an organization contact including name, homepage, addresses, emails, telephones, notes, and classification."@en ;
+    sh:targetClass foaf:Organization ;
+
+    sh:property
+
+        # Organization Name
+        [ sh:path schema:name ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+          rdfs:label "Organization Name"@en ;
+          rdfs:comment "The official name of the organization."@en
+        ],
+
+        # Homepage
+        [ sh:path schema:url ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Homepage URL"@en ;
+          rdfs:comment "The homepage or primary website of the organization."@en
+        ],
+
+        # Organization Type / Classification
+        [ sh:path rdf:type ;
+          sh:minCount 1 ;
+          rdfs:label "Organization Type"@en ;
+          rdfs:comment "The classification or type of organization (e.g., interesting organization category)."@en
+        ],
+
+        # Addresses
+        [ sh:path vcard:hasAddress ;
+          sh:minCount 0 ;
+          rdfs:label "Address"@en ;
+          rdfs:comment "Physical addresses."@en ;
+          sh:node [
+              a sh:NodeShape ;
+              sh:property
+                  [ sh:path vcard:street-address ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Street Address"@en ;
+                    rdfs:comment "Street address."@en
+                  ],
+                  [ sh:path vcard:locality ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "City/Locality"@en ;
+                    rdfs:comment "City or locality."@en
+                  ],
+                  [ sh:path vcard:region ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Region"@en ;
+                    rdfs:comment "State or region."@en
+                  ],
+                  [ sh:path vcard:postal-code ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Postal Code"@en ;
+                    rdfs:comment "Postal code."@en
+                  ],
+                  [ sh:path vcard:country-name ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Country"@en ;
+                    rdfs:comment "Country."@en
+                  ]
+          ]
+        ],
+
+        # Emails
+        [ sh:path vcard:hasEmail ;
+          sh:minCount 0 ;
+          rdfs:label "Email Addresses"@en ;
+          rdfs:comment "Email addresses."@en ;
+          sh:node [
+              a sh:NodeShape ;
+              sh:property
+                  [ sh:path vcard:value ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Email Address"@en ;
+                    rdfs:comment "The email address value."@en
+                  ],
+                  [ sh:path rdf:type ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Email Type"@en ;
+                    rdfs:comment "The type of email (e.g., home, work)."@en
+                  ]
+          ]
+        ],
+
+        # Telephones
+        [ sh:path vcard:hasTelephone ;
+          sh:minCount 0 ;
+          rdfs:label "Telephone Numbers"@en ;
+          rdfs:comment "Telephone numbers associated with the organization."@en ;
+          sh:node [
+              a sh:NodeShape ;
+              sh:property
+                  [ sh:path vcard:value ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Telephone Number"@en ;
+                    rdfs:comment "The telephone number."@en
+                  ],
+                  [ sh:path rdf:type ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Telephone Type"@en ;
+                    rdfs:comment "The type of telephone (e.g., work, cell)."@en
+                  ]
+          ]
+        ],
+
+        # Notes
+        [ sh:path vcard:note ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Notes"@en ;
+          rdfs:comment "General notes about the organization."@en
+        ] .

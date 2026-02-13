@@ -1,0 +1,128 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix pcs:  <https://solid.github.io/shapes/PersonContact#> .
+
+################################################################
+# Person Contact Shape
+################################################################
+
+pcs:PersonContactShape a sh:NodeShape ;
+    rdfs:label "Contact Person Shape" ;
+    rdfs:comment "SHACL shape representing an individual contact with name, organization, role, addresses, emails, phones, birthday, and notes." ;
+    sh:targetClass foaf:Person ;  
+    sh:property
+        [ sh:path vcard:fn ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+          rdfs:label "Full Name" ;
+          rdfs:comment "The full name of the contact." 
+        ],
+        [ sh:path vcard:role ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Role" ;
+          rdfs:comment "The role or job title of the contact." 
+        ],
+        [ sh:path vcard:organization-name ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Organization Name" ;
+          rdfs:comment "The organization the contact belongs to." 
+        ],
+        [ sh:path vcard:hasAddress ;
+          sh:minCount 0 ;
+          sh:node [
+              a sh:NodeShape ;
+              sh:property
+                  [ sh:path vcard:street-address ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Street Address" ;
+                    rdfs:comment "Street portion of the contact's address." 
+                  ],
+                  [ sh:path vcard:locality ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "City/Locality" ;
+                    rdfs:comment "City or locality of the contact's address." 
+                  ],
+                  [ sh:path vcard:region ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Region" ;
+                    rdfs:comment "State, province, or region of the contact's address." 
+                  ],
+                  [ sh:path vcard:postal-code ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Postal Code" ;
+                    rdfs:comment "Postal code of the contact's address." 
+                  ],
+                  [ sh:path vcard:country-name ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Country" ;
+                    rdfs:comment "Country of the contact's address." 
+                  ] 
+          ] ;
+          rdfs:label "Address" ;
+          rdfs:comment "The physical addresses of the contact." 
+        ],
+        [ sh:path vcard:hasEmail ;
+          sh:minCount 0 ;
+          sh:node [
+              a sh:NodeShape ;
+              sh:property
+                  [ sh:path vcard:value ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Email Address" ;
+                    rdfs:comment "The email address of the contact." 
+                  ],
+                  [ sh:path rdf:type ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Email Type" ;
+                    rdfs:comment "Type of email (home/work/etc)." 
+                  ]
+          ] ;
+          rdfs:label "Emails" ;
+          rdfs:comment "Email addresses of the contact." 
+        ],
+        [ sh:path vcard:hasTelephone ;
+          sh:minCount 0 ;
+          sh:node [
+              a sh:NodeShape ;
+              sh:property
+                  [ sh:path vcard:value ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Phone Number" ;
+                    rdfs:comment "The telephone number of the contact." 
+                  ],
+                  [ sh:path rdf:type ;
+                    sh:minCount 0 ;
+                    sh:maxCount 1 ;
+                    rdfs:label "Phone Type" ;
+                    rdfs:comment "Type of phone (cell/mobile/home/work)." 
+                  ]
+          ] ;
+          rdfs:label "Telephones" ;
+          rdfs:comment "Telephone numbers of the contact." 
+        ],
+        [ sh:path vcard:bday ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          sh:datatype xsd:date ;
+          rdfs:label "Birthday" ;
+          rdfs:comment "Date of bith" 
+        ],
+        [ sh:path vcard:note ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Notes" ;
+          rdfs:comment "General notes about the contact." 
+        ] .
