@@ -3,7 +3,7 @@
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
-@prefix :     <#> .
+@prefix ps:   <https://solid.github.io/shapes/Person#> .
 
 ################################################################
 # SHACL shape for a person/contact (from core:PersonForm)
@@ -11,7 +11,7 @@
 # see also  Person contact shape at [person contact shape](../Contacts/personContactShape.ttl)
 ################################################################
 
-:PersonShape
+ps:PersonShape
     a sh:NodeShape ;
     sh:targetClass vcard:Individual ;
     rdfs:label "Person Shape"@en ;
