@@ -1,0 +1,61 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix solid: <http://www.w3.org/ns/solid/terms#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix os:   <https://solid.github.io/shapes/Organization#> .
+
+
+################################################################
+# Source: OrganizationCreationForm
+
+# https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/organizationForm.ttl
+
+# see also Organization contact shape (../Contacts/organizationContactShape.ttl)
+################################################################
+
+os:OrganizationShape
+    a sh:NodeShape ;
+    sh:targetClass vcard:Organization ;
+    rdfs:label "Organization Shape"@en ;
+    rdfs:comment "SHACL shape for validating organization contact and classification details."@en ;
+
+    # Organization Name
+    sh:property [
+        sh:path schema:name ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:maxLength 200 ;
+        rdfs:label "Organization Name"@en ;
+        rdfs:comment "The official name of the organization."@en
+    ] ;
+
+    # Homepage URL
+    sh:property [
+        sh:path schema:url ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        rdfs:label "Homepage URL"@en ;
+        rdfs:comment "The homepage or primary web address of the organization."@en
+    ] ;
+
+    # Organization Type / Classification
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:in (
+            schema:Corporation
+            schema:EducationalOrganization
+            schema:GovernmentOrganization
+            schema:NGO
+            schema:PerformingGroup
+            schema:Project
+            schema:SportsOrganization
+        ) ;
+        rdfs:label "Organization Type / Category"@en ;
+        rdfs:comment "Classification of the organization as one of the predefined types."@en
+    ] .
