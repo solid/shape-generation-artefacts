@@ -6,7 +6,7 @@
 @prefix abs: <https://solid.github.io/shapes/addressBook#> .
 
 
-# ref https://raw.githack.com/solid/contacts/refs/heads/main/vcard-extension-addressbook.ttl
+# non-standard vcard extensions ref https://raw.githack.com/solid/contacts/refs/heads/main/vcard-extension-addressbook.ttl
 
 abs:AddressBookShape a sh:NodeShape ;
     rdfs:label "AddressBook"@en;    
