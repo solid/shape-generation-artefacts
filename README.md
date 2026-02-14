@@ -1,20 +1,22 @@
 # Solid Shape Artefacts
 
-This repository contains scripts, intermediate files, and outputs for a process aimed at identifying and extracting SHACL shape artefacts from SolidOS project repositories.
+## Introduction
+This repository contains scripts, intermediate files, and outputs for a process that identified and extracted shape artefacts from SolidOS project repositories. 
 
-The goal of this project is to:
+The [shapes](./shapes/) identified are used in core SolidOS applications and are shapes that Solid recommends to use.
 
-* Have in one place, files from the SolidOS project that contain SHACL shape-like artefacts eg form definitions
-* Have a collection of SHACL shape-like artefacts 
+The shapes will be added to a Solid shape and ontology catalogue. We have a roadmap to make this the marketplace for ontologies and shapes for the Solid ecosystem. The shapes will also used be as a point of reference for the creation of RDF Objects in [@solid/object](https://github.com/solid/object)
 
-The shape-like artefacts can later be used as a point of reference for the creation of RDF Objects in [@solid/object](https://github.com/solid/object) as well as SHACL shapes for inclusion in a proposed @solid/shapes repository.
+The output of this work is:
 
-
+- a collection of shapes that are used in SolidOS applications, and that Solid recommend to use
+- a collection of files from the SolidOS project that contain shape-like artefacts eg form definitions
+ 
 ---
 
-## Overview
+## Process
 
-The process involves: 
+The process involved: 
  * scan of multiple [GitHub repositories](https://github.com/orgs/SolidOS/repositories) associated with the [SolidOS Organisation](https://github.com/solid), to create a file list 
  * download of .ttl files  
  * copying of files that include the SHACL namespace to a separate folder. 
@@ -30,8 +32,6 @@ This repository contains:
     * copy .ttl files that contain SHACL namespace
 * Downloaded .ttl files
 
-
-
 ---
 
 ## Repository Structure
@@ -45,7 +45,7 @@ This repository contains:
     |    ├── ttl/         # Original downloaded ttl files (unmodified)
     |    └── ttl-containing-UIForm/ # Original downloaded ttl files (unmodified) containing ui:Form 
 │   └── processed/        # Intermediate shape artefacts - related files 
-├── outputs/              # Final shapeTree artefacts
+├── shapes/              # Final shapes
 ├── requirements.txt      # Python dependencies
 └── README.md
 ```
@@ -91,43 +91,30 @@ pip install -r requirements.txt
 ## How to Reproduce Results
 
 ### Scan SolidOS GitHub repositories 
-
 ```bash
 python scripts/1_getList.py
 ```
-
-
-### Download ttl files 
-
+### Download .ttl files 
 ```bash
 python scripts/2_getFiles.py
 ```
-
-Raw files will be saved to:
-
+Raw files are saved to:
 ```
 data/raw/ttl
 ```
 
 
 ### Copy SHACL files 
-
 ```bash
 python scripts/3_copySHACLfiles.py
 ```
-
 Raw files will be saved to:
-
 ```
 data/raw/shacl
 ```
-
-
 ---
 
 ## Data Sources
-
-
 
 | Source         | Description               | 
 | -------------- | ------------------------- |  
