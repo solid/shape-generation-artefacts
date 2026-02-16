@@ -1,17 +1,12 @@
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
-@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
-@prefix : <#>.
 
-<> rdfs:label "Shape file for VCARD data in Solid";
-  .
+@prefix ws: <https://solid.github.io/shapes/WebId#> .
 
 
-
-  :WebIdShape a sh:NodeShape;
+  ws:WebIdShape a sh:NodeShape;
   # A card may have any number of hhtp[s] URLs, with property vcard:url and where the type must be given.
   # so that systems know what they can use the URL for and how to present it.
   # We add vcard:Homepage, vcard:WebId, vcard:PublicId as friendly amendment to https://www.w3.org/TR/vcard-rdf/

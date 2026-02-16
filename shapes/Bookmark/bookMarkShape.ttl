@@ -3,7 +3,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix bk: <http://www.w3.org/2002/01/bookmark#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix bs: <https://solid.github.io/shapes/bookmark#> .
+@prefix bs: <https://solid.github.io/shapes/Bookmark#> .
 
 # NodeShape for Bookmark
 bs:BookmarkShape

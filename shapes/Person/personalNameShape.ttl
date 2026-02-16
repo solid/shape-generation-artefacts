@@ -1,12 +1,11 @@
-@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl:  <http://www.w3.org/2002/07/owl#> .
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix pps:   <https://solid.github.io/shapes/PersonalName#> .
 
-# Source file: ../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl
+@prefix ps: <https://solid.github.io/shapes/Person#> .
+
+# Reference  ../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl
 
 <> rdfs:label "Shape file for VCARD data in Solid";
    rdfs:comment "This SHACL file defines shapes for validating personal names in VCARDs, including structured name components." .
@@ -15,7 +14,7 @@
 # Structured personal name
 ############################################################
 
-pps:NameShape
+ps:PersonalNameShape
     a sh:NodeShape ;
     rdfs:label "Structured Personal Name Shape"@en ;
     rdfs:comment "Validates components of a person's structured name in VCARD data." ;

@@ -12,7 +12,7 @@ abs:AddressBookShape a sh:NodeShape ;
     rdfs:label "AddressBook"@en;    
     sh:targetClass vcard:AddressBook ;
     rdfs:comment "Represents a collection of vCard people and/or vCard groups"@en ; 
-    rdfs:comment "This class is not part of vCard as defined by the IETF"@en .
+    rdfs:comment "This class is not part of vCard as defined by the IETF"@en ;
 
     sh:property [
         rdfs:label "Formatted name"@en;
@@ -62,4 +62,4 @@ abs:AddressBookShape a sh:NodeShape ;
 
 
 
-# Source file: ../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl
+# Reference: ../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl

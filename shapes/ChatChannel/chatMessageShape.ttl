@@ -6,7 +6,7 @@
 @prefix terms: <http://purl.org/dc/terms/> .
 @prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
 @prefix sioc: <http://rdfs.org/sioc/ns#> .
-@prefix cms:   <https://solid.github.io/shapes/ChatMessage#> .
+@prefix ccs:   <https://solid.github.io/shapes/ChatChannel#> .
 
 # Ontology-level description
 <> 
@@ -15,7 +15,7 @@
 
 ########## Messages
 
-ms:MessageShape a sh:NodeShape ;
+ccs:MessageShape a sh:NodeShape ;
     rdfs:label "Message Shape" ;
     rdfs:comment "SHACL NodeShape defining constraints for messages in Solid Chat." ;
     sh:targetObjectsOf flow:message ;

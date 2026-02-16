@@ -5,8 +5,10 @@
 @prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
 @prefix ical: <http://www.w3.org/2002/12/cal/ical#> .
 @prefix ui:   <http://www.w3.org/ns/ui#> .
-@prefix cps:  <https://solid.github.io/shapes/ChatParticipation#> .
+
 @prefix solid: <http://www.w3.org/ns/solid/terms#> .
+
+@prefix ccs:   <https://solid.github.io/shapes/ChatChannel#> .
 
 # Ontology-level description
 <> 
@@ -15,7 +17,7 @@
 
 ################ Participation objects
 
-cps:ParticipationShape a sh:NodeShape ;
+ccs:ParticipationShape a sh:NodeShape ;
     rdfs:label "Participation Shape" ;
     rdfs:comment "SHACL NodeShape defining constraints for a participant in a Solid Chat." ;
     sh:targetObjectsOf flow:participation ;

@@ -4,8 +4,8 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
-@prefix es:  <https://solid.github.io/shapes/Email#> .
 
+@prefix es:  <https://solid.github.io/shapes/Email#> .
 
 
 <> rdfs:label "Shape file for VCARD data in Solid";
@@ -17,10 +17,11 @@
 ############################################################
 
 
-# Source file: ../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl
-# source file https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
+# Reference
+#  ../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl
+#  https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
 
-:EmailShape a sh:NodeShape ;
+es:EmailShape a sh:NodeShape ;
     sh:targetObjectsOf vcard:hasEmail;
     rdfs:label "Email Shape"@en ;
     rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type."@en ;
@@ -49,13 +50,13 @@
 
 ############################################################
 
-:HasEmailPropertyShape
+es:HasEmailPropertyShape
     a sh:PropertyShape ;
     rdfs:label "Has Email Property Shape"@en ;
     rdfs:comment "Defines the constraint for linking a contact to one or more email nodes."@en ;
 
     sh:path vcard:hasEmail ;
     sh:minCount 0 ;
-    sh:node :EmailShape .
+    sh:node es:EmailShape .
 
 

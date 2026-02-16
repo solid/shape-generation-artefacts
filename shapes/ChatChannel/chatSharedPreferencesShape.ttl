@@ -3,7 +3,8 @@
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix solid: <http://www.w3.org/ns/solid/terms#> .
 @prefix ui:   <http://www.w3.org/ns/ui#> .
-@prefix csps: <https://solid.github.io/shapes/ChatSharedPreferences#> .
+
+@prefix ccs:   <https://solid.github.io/shapes/ChatChannel#> .
 
 <> 
     rdfs:label "Solid Chat Shared Preferences Shapes" ;
@@ -11,7 +12,7 @@
 
 ################ Shared Preferences
 
-csps:SharedPreferencesShape a sh:NodeShape ;
+ccs:SharedPreferencesShape a sh:NodeShape ;
     rdfs:label "Shared Preferences Shape" ;
     rdfs:comment "NodeShape defining shared UI preferences for chat participants." ;
     sh:targetObjectsOf ui:sharedPreferences ;

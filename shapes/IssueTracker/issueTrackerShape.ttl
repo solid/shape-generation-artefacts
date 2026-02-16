@@ -95,7 +95,7 @@ its:IssueTrackerShape
 # Workflow State Class Shape
 ################################################################
 
-:WorkflowStateClassShape
+its:WorkflowStateClassShape
     a sh:NodeShape ;
     rdfs:label "Workflow State Class Shape"@en ;
     rdfs:comment "Defines constraints for a class representing a set of issue states."@en ;
@@ -121,7 +121,7 @@ its:IssueTrackerShape
 # Individual State Shape
 ################################################################
 
-:WorkflowStateShape
+its:WorkflowStateShape
     a sh:NodeShape ;
     rdfs:label "Workflow State Shape"@en ;
     rdfs:comment "Defines constraints for an individual issue state."@en ;

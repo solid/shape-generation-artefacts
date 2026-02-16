@@ -6,7 +6,10 @@
 @prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
 @prefix mee:  <http://www.w3.org/ns/pim/meeting#> .
 @prefix ui:   <http://www.w3.org/ns/ui#> .
-@prefix ccs:  <https://solid.github.io/shapes/chatChannel#> .
+
+@prefix ccs:  <https://solid.github.io/shapes/ChatChannel#> .
+
+
 
 # Ontology-level description
 <> 

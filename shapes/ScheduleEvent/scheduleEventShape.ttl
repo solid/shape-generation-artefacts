@@ -1,16 +1,15 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix cal: <http://www.w3.org/2002/12/cal/ical#> .
 @prefix sched: <http://www.w3.org/ns/pim/schedule#> .
-@prefix : <#> .
 
-# Source: Schedule event forms (single form / multi-step)
+@prefix ses:   <https://solid.github.io/shapes/PersonalName#> .
 
-:ScheduleEventShape
+
+# Reference: Schedule event forms (single form / multi-step)
+
+ses:ScheduleEventShape
     a sh:NodeShape ;
     rdfs:label "Schedule Event Shape"@en ;
     rdfs:comment "SHACL shape representing a scheduled event, including title, location, type, duration, authors, time proposals, and invitees."@en ;
@@ -50,3 +49,5 @@
         sh:minCount 1 ;
         rdfs:label "Duration in Days"@en ;
         rdfs:comment "Duration of the event in days for all-day events."@en
+
+    ].
