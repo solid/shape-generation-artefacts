@@ -6,12 +6,13 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix solid: <http://www.w3.org/ns/solid/terms#> .
 @prefix cos:  <https://solid.github.io/shapes/OrganizationContact#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 ################################################################
 # Organisation Contact SHACL Shape
 ################################################################
 
-ocs:OrganizationContactShape
+cos:OrganizationContactShape
     a sh:NodeShape ;
     rdfs:label "Organization Contact Shape"@en ;
     rdfs:comment "SHACL shape defining data constraints for an organization contact including name, homepage, addresses, emails, telephones, notes, and classification."@en ;
