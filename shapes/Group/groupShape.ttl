@@ -25,7 +25,6 @@ gs:GroupShape
         sh:path vcard:fn ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:maxCount 1 ;
         rdfs:label "Group Name"@en ;
         rdfs:comment "The formatted name of the group."@en
     ] ;
@@ -42,11 +41,10 @@ gs:GroupShape
 # Group Member Local Identifier Shape
 ################################################################
 
-:GroupMemberLocalId
+gs:GroupMemberLocalId
     a sh:NodeShape ;
     rdfs:label "Group Member Local Identifier Shape"@en ;
     rdfs:comment "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs."@en ;
-    rdfs:seeAlso "../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl" ;
     sh:targetObjectsOf vcard:member ;
 
     sh:property [
