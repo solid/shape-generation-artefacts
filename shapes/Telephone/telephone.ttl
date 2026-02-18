@@ -13,7 +13,8 @@ ts:TelephoneShape a sh:NodeShape;
     sh:path vcard:value;
     sh:nodeKind sh:IRI;  
     sh:pattern "^tel:" ;    # starts with tel:
-    sh:count 1;
+    sh:minCount 1;
+    sh:maxCount 1;
   ].
 
 

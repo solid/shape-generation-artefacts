@@ -14,15 +14,17 @@
     their Solid-compatible WebId, or an RDF Id in open public data.""";
     sh:targetObjectsOf vcard:url;
     sh:property [
-     sh:path rdf:type ;
-     sh:class rdfs:Class ;
-     sh:count 1;
-     sh:in (vcard:Home vcard:Work vcard:Homepage vcard:WebId vcard:PublicId);
+      sh:path rdf:type ;
+      sh:class rdfs:Class ;
+      sh:minCount 1;
+      sh:maxCount 1;
+      sh:in (vcard:Home vcard:Work vcard:Homepage vcard:WebId vcard:PublicId);
     ];
     sh:property [
-     sh:path vcard:value;
-          sh:pattern "^https?:" ;    # starts with http: or https:
-     sh:count 1;
+      sh:path vcard:value;
+      sh:pattern "^https?:" ;    # starts with http: or https:
+      sh:minCount 1;
+      sh:maxCount 1;
     ].
 
 
