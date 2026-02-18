@@ -1,0 +1,211 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+################################################################################
+# vCard Shape — only structure from ontology / RFC
+# ref:
+# https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.2
+# https://www.w3.org/2006/vcard/ns
+################################################################################
+
+vcard:VCardShape
+    a sh:NodeShape ;
+    rdfs:label "vCard Shape" ;
+    rdfs:comment "Validates a vCard individual according to vCard ontology and RFC 6350." ;
+    sh:targetClass vcard:VCard ;
+
+    sh:property [
+        sh:path vcard:fn ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        rdfs:comment "Full name of the vCard (mandatory, exactly one). RFC 6350 §6.2.1." ;
+    ] ;
+
+    sh:property [
+        sh:path vcard:n ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:node vcard:NameShape ;
+        rdfs:comment "Structured name of the vCard (optional, at most one). RFC 6350 §6.2.2." ;
+    ] ;
+
+    sh:property [
+        sh:path vcard:tel ;
+        sh:minCount 0 ;
+        rdfs:comment "Telephone number(s), zero or more. RFC 6350 §6.4.1." ;
+    ] ;
+
+    sh:property [
+        sh:path vcard:email ;
+        sh:minCount 0 ;
+        rdfs:comment "Email address(es), zero or more. RFC 6350 §6.4.2." ;
+    ] ;
+
+    sh:property [
+        sh:path vcard:adr ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:node vcard:AddressShape ;
+        rdfs:comment "Delivery address(es), zero or more. RFC 6350 §6.3.1." ;
+    ] ;
+.
+
+################################################################################
+# Structured Name
+################################################################################
+
+vcard:NameShape
+    a sh:NodeShape ;
+    rdfs:label "Structured Name Shape" ;
+    rdfs:comment "Validates a structured name (N) according to vCard ontology and RFC 6350 §6.2.2." ;
+    sh:targetClass vcard:Name ;
+
+    sh:property [
+        sh:path vcard:family-name ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Family name component of the structured name." ;
+    ] ;
+    sh:property [
+        sh:path vcard:given-name ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Given name component of the structured name." ;
+    ] ;
+    sh:property [
+        sh:path vcard:additional-name ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Additional names (middle names) of the structured name." ;
+    ] ;
+    sh:property [
+        sh:path vcard:honorific-prefix ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Honorific prefix of the structured name (e.g., Dr., Mr.)." ;
+    ] ;
+    sh:property [
+        sh:path vcard:honorific-suffix ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Honorific suffix of the structured name (e.g., Jr., III)." ;
+    ] ;
+.
+
+################################################################################
+# Address
+################################################################################
+
+vcard:AddressShape
+    a sh:NodeShape ;
+    rdfs:label "Address Shape" ;
+    rdfs:comment "Validates an address (ADR) according to vCard ontology and RFC 6350 §6.3.1." ;
+    sh:targetClass vcard:Address ;
+
+    sh:property [
+        sh:path vcard:street-address ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Street address component of the delivery address." ;
+    ] ;
+    sh:property [
+        sh:path vcard:extended-address ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Extended address component (e.g., apartment, suite)." ;
+    ] ;
+    sh:property [
+        sh:path vcard:locality ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Locality (city) of the address." ;
+    ] ;
+    sh:property [
+        sh:path vcard:region ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Region (state or province) of the address." ;
+    ] ;
+    sh:property [
+        sh:path vcard:postal-code ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Postal code or ZIP code of the address." ;
+    ] ;
+    sh:property [
+        sh:path vcard:country-name ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Country name of the address." ;
+    ] ;
+    sh:property [
+        sh:path vcard:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Formatted text label for the address (optional)." ;
+    ] ;
+    sh:property [
+        sh:path vcard:post-office-box ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "PO Box of the address (optional)." ;
+    ] ;
+.
+
+################################################################################
+# Organization
+################################################################################
+
+vcard:OrganizationShape
+    a sh:NodeShape ;
+    rdfs:label "Organization Shape" ;
+    rdfs:comment "Validates organization entities according to vCard ontology." ;
+    sh:targetClass vcard:Organization ;
+
+    sh:property [
+        sh:path vcard:organization-name ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Name of the organization." ;
+    ] ;
+.
+
+################################################################################
+# Email
+################################################################################
+
+vcard:EmailShape
+    a sh:NodeShape ;
+    rdfs:label "Email Shape" ;
+    rdfs:comment "Validates email addresses according to vCard ontology." ;
+    sh:targetClass vcard:Email ;
+
+    sh:property [
+        sh:path rdf:value ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Email value as a string." ;
+    ] ;
+.
+
+################################################################################
+# Telephone
+################################################################################
+
+vcard:TelephoneShape
+    a sh:NodeShape ;
+    rdfs:label "Telephone Shape" ;
+    rdfs:comment "Validates telephone numbers according to vCard ontology." ;
+    sh:targetClass vcard:Telephone ;
+
+    sh:property [
+        sh:path rdf:value ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:comment "Telephone value as a string." ;
+    ] ;
+.
