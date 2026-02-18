@@ -35,7 +35,6 @@ abs:AddressBookShape a sh:NodeShape ;
     rdfs:comment "This property is not part of vCard as defined by the IETF"@en ;
     sh:path vcard:groupIndex ;
     sh:datatype xsd:anyURI; 
-    a sh:FollowMe; # Loadme before continuing...
     sh:minCount 1;
     sh:maxCount 1;
   ] ;
@@ -55,7 +54,6 @@ abs:AddressBookShape a sh:NodeShape ;
     rdfs:comment "This property is not part of vCard as defined by the IETF"@en ;
     sh:path vcard:inAddressBook ; ## Inverse
     sh:datatype xsd:anyURI; 
-    a sh:FollowMe; # Loadme before continuing...
     sh:minCount 1;
     sh:maxCount 1;
   ] .
