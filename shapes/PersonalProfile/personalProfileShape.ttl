@@ -3,12 +3,9 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix schema: <http://schema.org/> .
 @prefix solid: <http://www.w3.org/ns/solid/terms#> .
 @prefix org: <http://www.w3.org/ns/org#> .
-@prefix esco: <http://data.europa.eu/esco/model#> .
-@prefix soc: <https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#> .
 @prefix : <https://solidos.github.io/profile-pane/src/ontology/profileForm.ttl#> .
 
 # Source: profile UI form definitions for SolidOS contacts/profile
