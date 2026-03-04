@@ -15,7 +15,7 @@ ads:AddressShape
     rdfs:label "Address"@en;
     sh:targetClass vcard:Address;
     a sh:NodeShape ;
-    sh:codeIdentifier "Address shape";
+    sh:codeIdentifier "Address";
 
     sh:property [
         rdfs:label "Street Address"@en;
